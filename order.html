@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan Produk via WhatsApp</title>
+</head>
+<body>
+    <h2>Pilih Produk untuk Dipesan</h2>
+    <form id="orderForm">
+        <label><input type="checkbox" value="Baju Shiva"> Baju Shiva</label><br>
+        <label><input type="checkbox" value="Ultraman"> Ultraman</label><br>
+        <label><input type="checkbox" value="Power Ranger"> Power Ranger</label><br>
+        <label><input type="checkbox" value="Kamen Rider"> Kamen Rider</label><br>
+        <label><input type="checkbox" value="Upin Ipin"> Upin Ipin</label><br>
+        <label><input type="checkbox" value="Celana Angel"> Celana Angel</label><br>
+        <label><input type="checkbox" value="Baju Free Fire"> Baju Free Fire</label><br>
+        <br>
+        <button type="button" onclick="sendOrder()">Pesan via WhatsApp</button>
+    </form>
+
+    <script>
+        function sendOrder() {
+            const selectedItems = [];
+            document.querySelectorAll('input[type=checkbox]:checked').forEach(item => {
+                selectedItems.push(item.value);
+            });
+            
+            if (selectedItems.length === 0) {
+                alert("Silakan pilih minimal satu produk!");
+                return;
+            }
+            
+            const orderText = `Saya ingin memesan: ${selectedItems.join(', ')}`;
+            const phoneNumber = "+6281311248796"; // Ganti dengan nomor tujuan
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderText)}`;
+            
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+</body>
+</html>
